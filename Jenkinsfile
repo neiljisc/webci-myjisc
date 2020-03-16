@@ -40,7 +40,7 @@ pipeline {
 
     stage('checkout') {
       steps {
-        sh '(cd docker4php/data/web && ln -sf  ../../../ drupal)'
+        sh '(cd docker4php/data/web && rm -rf drupal && ln -f  ../../../ drupal)'
         sh 'cd docker4php ; source .project_name && make && echo export PROJECT_NAME=$PROJECT_NAME >  .pname '
       }
     }
