@@ -22,7 +22,7 @@ pipeline {
       }
     }
 
-    stage('clone') {
+    stage('clone-docker4php') {
       steps {
         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
           sh 'git clone https://github.com/janetuk/docker4php.git'
@@ -30,7 +30,7 @@ pipeline {
       }
     }
     
-    stage('clone') {
+    stage('clone-myjisc') {
       steps {
         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
           sh 'git clone https://github.com/janetuk/myjisc.git docker4php/data/web/drupal'
