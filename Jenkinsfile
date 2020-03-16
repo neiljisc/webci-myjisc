@@ -25,22 +25,22 @@ pipeline {
     stage('clone-docker4php') {
       steps {
         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-          sh 'git clone https://github.com/janetuk/docker4php.git'
+          sh 'git clone https://github.com/janetuk/docker4php.git && git checkout '
         }
       }
     }
     
-    stage('clone-myjisc') {
-      steps {
-        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-          sh 'git clone https://github.com/janetuk/myjisc.git docker4php/data/web/drupal'
-        }
-      }
-    }
+   // stage('clone-myjisc') {
+    //  steps {
+     //   catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+      //    sh 'git clone https://github.com/janetuk/myjisc.git docker4php/data/web/drupal'
+  //      }
+  //    }
+  //  }
 
     stage('checkout') {
       steps {
-        sh '(cd docker4php/data/web/drupal && git checkout develop)'
+        sh '(cd docker4php/data/web && ln -s ln -s  ../../../ drupal)'
         sh 'cd docker4php ; source .project_name && make && echo export PROJECT_NAME=$PROJECT_NAME >  .pname '
       }
     }
