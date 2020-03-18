@@ -7,6 +7,7 @@
 
 // default - for demo purposes
 
+$toRun = [];
 $fileToCheck = "modules/custom/jisc_updates";
 if ( isset ( $argv[1]) ){
    $fileToCheck = $argv[1];
@@ -52,13 +53,20 @@ for  ($i = 0 ; $i < count($lines) ; $i++ ){
 
                 $res = ob_get_clean();
                 if ( preg_match("!$fileToCheck!", $res)) {
-                    echo "##########" . PHP_EOL;
-                    echo $res;
-                    echo $first_line . PHP_EOL;
-                    echo $date . PHP_EOL;
-                    echo $lines[$i] . PHP_EOL;
+//                    echo "##########" . PHP_EOL;
+                    $toRun[] = $res;
+//                    echo $res;
+//                    echo $first_line . PHP_EOL;
+//                    echo $date . PHP_EOL;
+//                    echo $lines[$i] . PHP_EOL;
                 }
             }
         }
     }
 }
+
+if ($toRun){
+   foreach ( array_reverse($toRun) as $commandsToRun) {
+       echo $commandsToRun .PHP_EOL;
+   }                 
+}  
