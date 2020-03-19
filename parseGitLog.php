@@ -8,18 +8,20 @@
 // default - for demo purposes
 
 $toRun = [];
-$fileToCheck = "modules/custom/jisc_updates";
+$fileToCheck = "updates";
 if ( isset ( $argv[1]) ){
    $fileToCheck = $argv[1];
 }
 
-$fh = popen ("git log","r");
+$ph = popen ("git log","r");
 
 $file = "";
 
-while ( !feof($fh)) {
-    $file .= fread($fh,16384);
+while ( !feof($ph)) {
+    $file .= fread($ph,16384);
 }
+
+pclose ($ph);
 
 $lines = explode( PHP_EOL, $file);
 
@@ -54,7 +56,7 @@ for  ($i = 0 ; $i < count($lines) ; $i++ ){
                 $res = ob_get_clean();
                 if ( preg_match("!$fileToCheck!", $res)) {
 //                    echo "##########" . PHP_EOL;
-                    $toRun[] = $res;
+                    $toRun[] = trim($res);
 //                    echo $res;
 //                    echo $first_line . PHP_EOL;
 //                    echo $date . PHP_EOL;
@@ -65,8 +67,35 @@ for  ($i = 0 ; $i < count($lines) ; $i++ ){
     }
 }
 
-if ($toRun){
-   foreach ( array_reverse($toRun) as $commandsToRun) {
-       echo $commandsToRun .PHP_EOL;
-   }                 
-}  
+/* Now get any other tasks that we might want to run 
+ * which have not been merged in via a PR yet 
+ */
+
+function getAdditionalCommands(&$toRun, $fileToCheck) {
+
+    $lsOutput="";
+    $lsPH = popen("find $fileToCheck -type f", "r");
+    while (!feof($lsPH)) {
+        $lsOutput .= fread($lsPH,16384);
+    }
+    pclose ($lsPH);
+    $lsOutputLines = explode(PHP_EOL, $lsOutput);
+    foreach ($lsOutputLines as $lsOutputLine ){
+        if (!in_array($lsOutputLine, $toRun) && $lsOutputLine != "" ){
+            array_unshift($toRun, $lsOutputLine);
+        }
+    }
+
+}
+
+function printCommands($toRun) {
+
+    if ($toRun){
+        foreach ( array_reverse($toRun) as $commandsToRun) {
+            echo $commandsToRun . PHP_EOL;
+        }
+    }
+}
+
+getAdditionalCommands($toRun, $fileToCheck);
+printCommands($toRun);
