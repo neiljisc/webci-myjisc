@@ -48,7 +48,7 @@ pipeline {
 
     stage('webci') {
       steps {
-        sh 'cd web ;git clone https://github.com/neiljisc/webci-myjisc.git && cd webci-myjisc && git checkout drupal-umami'
+        sh 'cd web ;if [ ! -d webci-myjisc ] ; then git clone https://github.com/neiljisc/webci-myjisc.git ; fi ; cd webci-myjisc && git checkout drupal-umami'
       }
     }
 
