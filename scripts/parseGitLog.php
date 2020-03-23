@@ -74,6 +74,9 @@ for  ($i = 0 ; $i < count($lines) ; $i++ ){
 function getAdditionalCommands(&$toRun, $fileToCheck) {
 
     $lsOutput="";
+    if  (!file_exists($fileToCheck)) {
+        exit(0);
+    }
     $lsPH = popen("find $fileToCheck -type f", "r");
     while (!feof($lsPH)) {
         $lsOutput .= fread($lsPH,16384);

@@ -1,12 +1,14 @@
 #!/bin/bash 
 
-for file in `php webci-myjisc/scripts/parseGitLog.php`
+cd `dirname $0`
+
+for file in `php parseGitLog.php ../../../updates`
 do
-testUpdate=`webci-myjisc/scripts/checkIfUpdateApplied $file`
+testUpdate=`./checkIfUpdateApplied $file`
 if [ "X$testUpdate" = "X" ] ; then
    echo running $file
    $file
-   webci-myjisc/scripts/addUpdateScriptToDb $file
+   ./addUpdateScriptToDb $file
 fi
 done
 

@@ -65,7 +65,11 @@ pipeline {
       }
     }
 
-
+    stage ('run-updates) {
+      steps {
+        sh 'web/webci-myjisc/scripts/run-updates.sh'
+      }
+    }
  
 //    stage('Test') {
 //      steps {
