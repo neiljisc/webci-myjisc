@@ -1,0 +1,1 @@
+drush sql-query "insert into updates (name,created_date) values (\"$1\",now())"

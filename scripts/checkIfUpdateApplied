@@ -1,0 +1,2 @@
+drush sql-query "select name  from updates where name = \"$1\" "
+

@@ -1,0 +1,2 @@
+drush sql-query "select * from updates"
+
