@@ -25,7 +25,7 @@ pipeline {
     stage('clone-docker4php') {
       steps {
         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-          sh 'git clone https://github.com/janetuk/docker4php.git && git checkout '
+          sh 'if [ ! -d docker4php ] ; then git clone https://github.com/janetuk/docker4php.git ; fi  '
         }
       }
     }
@@ -48,7 +48,7 @@ pipeline {
 
     stage('webci') {
       steps {
-        sh 'cd web ;if [ ! -d webci-myjisc ] ; then git clone https://github.com/neiljisc/webci-myjisc.git ; fi ; cd webci-myjisc && git checkout drupal-umami'
+        sh 'cd web ;if [ ! -d webci-myjisc ] ; then git clone https://github.com/neiljisc/webci-myjisc.git ; fi ; cd webci-myjisc && git checkout drupal-umami && git pull'
       }
     }
 
