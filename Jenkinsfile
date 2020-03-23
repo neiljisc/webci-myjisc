@@ -65,7 +65,7 @@ pipeline {
       }
     }
 
-    stage ('run-updates) {
+    stage ('run-updates') {
       steps {
         sh 'web/webci-myjisc/scripts/run-updates.sh'
       }
