@@ -30,13 +30,13 @@ pipeline {
       }
     }
 
-    stage('create-drupal-directory') {
-      steps {
-        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') { 
-          sh 'cd docker4php ; mkdir -p data/web ; cd data/web ; ln -s ../../../ drupal' 
-        }
-      }
-    }
+//    stage('create-drupal-directory') {
+//      steps {
+//        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') { 
+//          sh 'cd docker4php ; mkdir -p data/web ; cd data/web ; ln -s ../../../ drupal' 
+//        }
+//      }
+//    }
  
    // stage('clone-myjisc') {
     //  steps {
