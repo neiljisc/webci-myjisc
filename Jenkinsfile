@@ -26,11 +26,18 @@ pipeline {
       steps {
         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
           sh 'git clone https://github.com/janetuk/docker4php.git && git checkout '
-          sh 'cd docker4php ; mkdir -p data/web ; cd data/web ; ln -s ../../../ drupal'
         }
       }
     }
-    
+
+    stage('create-drupal-directory') {
+      steps {
+        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') { 
+          sh 'cd docker4php ; mkdir -p data/web ; cd data/web ; ln -s ../../../ drupal' 
+        }
+      }
+    }
+ 
    // stage('clone-myjisc') {
     //  steps {
      //   catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
