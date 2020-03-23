@@ -67,7 +67,7 @@ pipeline {
 
     stage ('run-updates') {
       steps {
-        sh 'web/webci-myjisc/scripts/run-updates.sh'
+        sh 'export CMD="web/webci-myjisc/scripts/run-updates.sh" ; make fpmi'
       }
     }
  
