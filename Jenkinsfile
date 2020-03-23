@@ -46,6 +46,12 @@ pipeline {
   //    }
   //  }
 
+    stage('webci') {
+      steps {
+        sh 'cd web ;git clone https://github.com/janetuk/webci-myjisc.git && cd webci-myjisc && git checkout drupal-umami'
+      }
+    }
+
     stage('checkout') {
       steps {
         sh '(cd docker4php/data/web && rm -rf drupal && ln -s  ../../../ drupal)'
@@ -57,7 +63,10 @@ pipeline {
       steps {
         sh "cd docker4php ; source .pname && export CMD='composer install' &&  sh -c 'make fpmi '"
       }
-    } 
+    }
+
+
+ 
 //    stage('Test') {
 //      steps {
 //        sh 'yarn'
