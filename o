@@ -1,0 +1,1 @@
+sh -c "export CMD="\""echo "\'"drop database drupal ; create database drupal"\'" |  mysql -uroot -ppassword -hmariadb drupal"\"" ; make fpmi "
