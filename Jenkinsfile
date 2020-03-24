@@ -67,7 +67,7 @@ pipeline {
 
     stage('import-db') {
       steps {
-        sh 'cd docker4php ; CMD="mysql -uroot -ppassword -hmariadb drupal" ; make fpmi < /Users/neil.mckett/projects/db_dumps/drupal-umami-latest.sql');
+        sh 'cd docker4php ; CMD="mysql -uroot -ppassword -hmariadb drupal" ; make fpmi < /Users/neil.mckett/projects/db_dumps/drupal-umami-latest.sql'
       }
     }
 
