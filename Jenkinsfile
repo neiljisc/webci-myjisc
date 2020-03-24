@@ -9,7 +9,9 @@ pipeline {
   stages {
     stage('Init') {
       steps {
-        sh 'mkdir -p data/web'
+        configFileProvider([configFile(fileId: '06662201-85d1-4d63-a6a9-c9daf3a8fc6f', variable: 'UMAMI_SETTINGS')]) {
+          sh 'cd ./web/sites/default && cp $UMAMI_SETTINGS settings.php && ls' 
+        }
       }
     }
 
