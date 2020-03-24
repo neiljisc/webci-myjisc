@@ -65,6 +65,12 @@ pipeline {
       }
     }
 
+    stage('import-db') {
+      steps {
+        sh 'cd docker4php ; CMD="mysql -uroot -ppassword -hmariadb drupal" ; make fpmi < /Users/neil.mckett/projects/db_dumps/drupal-umami-latest.sql');
+      }
+    }
+
     stage ('run-updates') {
       steps {
         sh 'cd docker4php; export CMD="web/webci-myjisc/scripts/run-updates.sh" ; make fpmi'
