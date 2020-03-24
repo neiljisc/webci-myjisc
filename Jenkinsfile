@@ -55,7 +55,7 @@ pipeline {
     stage('checkout') {
       steps {
         sh '(cd docker4php/data/web && rm -rf drupal && ln -s  ../../../ drupal)'
-        sh 'cd docker4php ;git checkout drupal9_web ;  source .project_name && make && echo export PROJECT_NAME=$PROJECT_NAME >  .pname '
+        sh 'cd docker4php ;git checkout drupal9_web ; git pull ;   source .project_name && make && echo export PROJECT_NAME=$PROJECT_NAME >  .pname '
       }
     }
     
@@ -68,7 +68,7 @@ pipeline {
     stage('wipe-db') {
       steps {
 //        sh  "export CMD="\""echo "\'"drop database drupal ; create database drupal"\'" |  mysql -uroot -ppassword -hmariadb drupal"\"" ; make fpmi "
-        sh  'cd docker4php ; export CMD="echo drop database drupal |  mysql -uroot -ppassword -hmariadb" ; make fpmi '
+        sh  'cd docker4php ; export CMD="echo drop database if exists drupal |  mysql -uroot -ppassword -hmariadb" ; make fpmi '
         sh  'cd docker4php ; export CMD="echo create database drupal |  mysql -uroot -ppassword -hmariadb" ; make fpmi '
 
       }
