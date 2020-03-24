@@ -68,8 +68,8 @@ pipeline {
     stage('wipe-db') {
       steps {
 //        sh  "export CMD="\""echo "\'"drop database drupal ; create database drupal"\'" |  mysql -uroot -ppassword -hmariadb drupal"\"" ; make fpmi "
-        sh  'cd docker4php ; export CMD="echo drop database drupal |  mysql -uroot -ppassword -hmariadb drupal" ; make fpmi '
-        sh  'cd docker4php ; export CMD="echo create database drupal |  mysql -uroot -ppassword -hmariadb drupal" ; make fpmi '
+        sh  'cd docker4php ; export CMD="echo drop database drupal |  mysql -uroot -ppassword -hmariadb" ; make fpmi '
+        sh  'cd docker4php ; export CMD="echo create database drupal |  mysql -uroot -ppassword -hmariadb" ; make fpmi '
 
       }
     }
