@@ -19,7 +19,7 @@ pipeline {
       steps {
         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
           sh 'if [ ! -d docker4php ] ; then git clone https://github.com/janetuk/docker4php.git ; fi  '
-          sh 'if [ -d docker4php ] ; then cd docker4php ; mkdir data/web ; fi'
+          sh 'if [ -d docker4php ] ; then cd docker4php ; mkdir -p data/web ; fi'
         }
       }
     }
