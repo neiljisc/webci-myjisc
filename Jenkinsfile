@@ -25,7 +25,7 @@ pipeline {
 
     stage('webci') {
       steps {
-        sh 'cd web ;if [ ! -d webci-myjisc ] ; then git clone https://github.com/neiljisc/webci-myjisc.git ; fi ; cd webci-myjisc && git checkout drupal-umami && git pull'
+        sh 'cd web ;if [ ! -d webci-myjisc ] ; then git clone https://github.com/neiljisc/webci-myjisc.git ; fi ; cd webci-myjisc && git checkout myjisci && git pull'
       }
     }
 
@@ -51,7 +51,7 @@ pipeline {
 
     stage('import-db') {
       steps {
-        sh 'cd docker4php ; source .pname ; docker cp /Users/neil.mckett/projects/db_dumps/drupal-umami-latest.sql ${PROJECT_NAME}_php:/tmp ; export CMD="mysql -uroot -ppassword -hmariadb drupal < /tmp/drupal-umami-latest.sql " ; make fpmi '
+        sh 'cd docker4php ; source .pname ; docker cp /Users/neil.mckett/projects/db_dumps/myjisc-latest.sql ${PROJECT_NAME}_php:/tmp ; export CMD="mysql -uroot -ppassword -hmariadb drupal < /tmp/myjisc-latestsql " ; make fpmi '
       }
     }
 
