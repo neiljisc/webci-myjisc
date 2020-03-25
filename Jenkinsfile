@@ -75,7 +75,7 @@ pipeline {
 
     stage('yarn') {
       steps {
-        sh ' export CMD="apk add yarn ; apk add npm ; cd /var/www/html/web/themes/jiscux ; yarn add @jisc/front-end-foundations ; yarn install ; rm -rf front-end-foundations ; ln -s node_modules/\@jisc/front-end-foundations  ; touch front-end-foundations/src/scss/1-settings/settings.variables.images ; npm install -g gulp ; gulp build" ; make nginxi '
+        sh ' export CMD="apk add yarn ; apk add npm ; cd /var/www/html/web/themes/jiscux ; yarn add @jisc/front-end-foundations ; yarn install ; rm -rf front-end-foundations ; ln -s node_modules/@jisc/front-end-foundations  ; touch front-end-foundations/src/scss/1-settings/settings.variables.images ; npm install -g gulp ; gulp build" ; make nginxi '
       }
     }
  
