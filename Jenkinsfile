@@ -30,6 +30,11 @@ pipeline {
       }
     }
 
+    stage('cp jisc_ci module') {
+      steps {
+        sh 'cd web ; if [ ! -d modules/custom/jisc_ci ] ; then cp -rfp webci-myjisc/modules/custom/jisc_ci modules/custom ; fi '
+      }
+    }
     stage('checkout') {
       steps {
         sh '(cd docker4php/data/web && rm -rf drupal && ln -s  ../../../ drupal)'
@@ -45,7 +50,7 @@ pipeline {
 
     stage('install jisc_ci module') {
       steps {
-        sh 'cd web ; if [ ! -d modules/custom/jisc_ci ] ; then cp -rfp webci-myjisc/modules/custom/jisc_ci modules/custom ; drush pm:enable jisc_ci; fi '
+        sh 'cd docker4php ;  CMD="drush pm:enable jisc_ci" ; make fpmi'
       }
     }
 
