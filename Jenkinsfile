@@ -44,7 +44,7 @@ pipeline {
     
     stage('composer') {
       steps {
-        sh "cd docker4php ; source .pname && export CMD='composer install' &&  sh -c 'make fpmi '"
+        sh "cd docker4php ; source .pname && export CMD='rm -rf web/core ; composer install' &&  sh -c 'make fpmi '"
       }
     }
 
