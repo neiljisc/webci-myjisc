@@ -48,12 +48,6 @@ pipeline {
       }
     }
 
-    stage('install jisc_ci module') {
-      steps {
-        sh 'cd docker4php ;  export CMD="drush pm:enable jisc_ci" ; make fpmi'
-      }
-    }
-
     stage('wipe-db') {
       steps {
         sh  'cd docker4php ; export CMD="echo drop database if exists drupal |  mysql -uroot -ppassword -hmariadb" ; make fpmi '
@@ -64,6 +58,12 @@ pipeline {
     stage('import-db') {
       steps {
         sh 'cd docker4php ; source .pname ; docker cp /Users/neil.mckett/projects/db_dumps/myjisc-latest.sql ${PROJECT_NAME}_php:/tmp ; export CMD="mysql -uroot -ppassword -hmariadb drupal < /tmp/myjisc-latest.sql " ; make fpmi '
+      }
+    }
+
+    stage('install jisc_ci module') {
+      steps {
+        sh 'cd docker4php ;  export CMD="drush pm:enable jisc_ci" ; make fpmi'
       }
     }
 
