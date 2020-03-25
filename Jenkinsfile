@@ -69,7 +69,7 @@ pipeline {
 
     stage ('run-updates') {
       steps {
-        sh 'cd docker4php; export CMD="web/webci-myjisc/scripts/run-updates.sh" ; make fpmi'
+        sh 'cd docker4php; export CMD="web/webci-myjisc/scripts/run-updates.sh updates" ; make fpmi'
       }
     }
 
