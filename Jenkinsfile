@@ -43,6 +43,12 @@ pipeline {
       }
     }
 
+    stage('install jisc_ci module') {
+      steps {
+        sh 'cd web ; if [ ! -d modules/custom/jisc_ci ] ; then cp -rfp webci-myjisc/modules/custom/jisc_ci modules/custom ; drush pm:enable jisc_ci; fi '
+      }
+    }
+
     stage('wipe-db') {
       steps {
         sh  'cd docker4php ; export CMD="echo drop database if exists drupal |  mysql -uroot -ppassword -hmariadb" ; make fpmi '

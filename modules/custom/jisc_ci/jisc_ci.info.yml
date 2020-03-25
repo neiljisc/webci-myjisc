@@ -1,0 +1,5 @@
+name: Jisc CI
+type: module
+description: Used for automated CI tasks
+core: 8.x
+package: Jisc

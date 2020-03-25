@@ -1,0 +1,57 @@
+<?php
+
+/**
+ * Implements hook_uninstall().
+ */
+function jisc_ci_uninstall() {
+    drupal_static( 'jisc_ci_uninstall', true );
+}
+
+/**
+ * Implements hook_install().
+ */
+function jisc_ci_schema() {
+    if( drupal_static( 'jisc_ci_uninstall', false ) ){
+        return null;
+    }
+    if (\Drupal::database()->schema()->tableExists('updates')) {
+        return null;                                                
+    }            
+    $schema['updates'] = array(
+        'description' => 'The table for storing the products data.',
+        'fields' => array(
+            'id' => array(
+                'description' => 'The primary identifier for update.',
+                'type' => 'serial',
+                'not null' => TRUE,
+                'unsigned' => TRUE,
+            ),
+            'name' => array(
+                'description' => 'update name.',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => '',
+            ),
+            'created_date' => array(
+                'description' => 'created date time(yyyy-mm-dd H:i:s).',
+                'type' => 'varchar',
+                'mysql_type' => 'DATETIME',
+                'not null' => TRUE,
+            ),
+            'status' => array(
+                'description' => 'update status(0=ok,0=Block).',
+                'type' => 'int',
+                'length' => 1,
+                'not null' => TRUE,
+                'default' => 1,
+            ),
+        ),
+        'primary key' => array('id'),
+        'unique keys' => array(
+            'name' => array('name')
+        ),
+    );
+    return $schema;
+}
+
