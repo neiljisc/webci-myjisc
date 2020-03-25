@@ -50,7 +50,7 @@ pipeline {
 
     stage('install jisc_ci module') {
       steps {
-        sh 'cd docker4php ;  CMD="drush pm:enable jisc_ci" ; make fpmi'
+        sh 'cd docker4php ;  export CMD="drush pm:enable jisc_ci" ; make fpmi'
       }
     }
 
