@@ -18,15 +18,20 @@ pipeline {
     stage('clone-docker4php') {
       steps {
         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-          sh 'if [ ! -d docker4php ] ; then git clone https://github.com/janetuk/docker4php.git ; fi  '
-          sh 'if [ -d docker4php ] ; then cd docker4php ; mkdir -p data/web ; fi'
+            dir ('docker4php') {
+              git branch: 'drupal9_web', credentialsId: 'a3beddd6-e0fb-4e55-8928-6866e922b32e', url: 'https://github.com/janetuk/docker4php'
+            }
         }
-      }
     }
 
     stage('webci') {
       steps {
-        sh 'cd web ;if [ ! -d webci-myjisc ] ; then git clone https://github.com/neiljisc/webci-myjisc.git ; fi ; cd webci-myjisc && git checkout myjisc && git pull'
+        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+            dir ('web/webci-myjisc') {
+              git branch: 'myjisc', credentialsId: 'a3beddd6-e0fb-4e55-8928-6866e922b32e', url: 'https://github.com/neiljisc/webci-myjisc'
+            }
+        }
+        //sh 'cd web ;if [ ! -d webci-myjisc ] ; then git clone https://github.com/neiljisc/webci-myjisc.git ; fi ; cd webci-myjisc && git checkout myjisc && git pull'
       }
     }
 
