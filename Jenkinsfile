@@ -50,7 +50,7 @@ pipeline {
     
     stage('composer') {
       steps {
-        sh "cd docker4php ; source \$PWD/.pname && export CMD='cd / ; sudo rm -rf /var/www/html ; sudo ln -s /opt/var/www/html /var/www/html  ; cd /var/www/html ;rm -rf web/core ; composer install' &&  sh -c 'make fpmi '"
+        sh "cd docker4php ; source \$PWD/.pname && export CMD='cd / ; sudo rm -rf /var/www/html ; sudo ln -s /opt/var/www/html /var/www/html  ; cd /var/www/html ;rm -rf web/core ; sudo sudo chmod -R 777 modules ; composer install' &&  sh -c 'make fpmi '"
       }
     }
 
