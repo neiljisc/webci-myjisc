@@ -81,7 +81,7 @@ pipeline {
 
     stage('yarn') {
       steps {
-        sh ' cd docker4php; export CMD="apk add yarn ; apk add npm ; cd /opt/var/www/html/web/themes/jiscux ; yarn add @jisc/front-end-foundations ; yarn install ; rm -rf front-end-foundations ; ln -s node_modules/@jisc/front-end-foundations  ; touch front-end-foundations/src/scss/1-settings/settings.variables.images ; npm install -g gulp ; gulp build" ; make nginxi '
+        sh ' cd docker4php; export CMD="apk add yarn ; apk add npm ; sudo chmod -R 777 /opt/var/www/html/web/sites ; cd /opt/var/www/html/web/themes/jiscux ; npm config set user 0; npm config set unsafe-perm true ; yarn add @jisc/front-end-foundations ;  yarn install ; rm -rf front-end-foundations ; ln -s node_modules/@jisc/front-end-foundations  ; touch front-end-foundations/src/scss/1-settings/settings.variables.images ; npm install -g gulp ; gulp build" ; make nginxi '
       }
     }
  
