@@ -44,7 +44,7 @@ pipeline {
     
     stage('composer') {
       steps {
-        sh "cd docker4php ; source .pname && export CMD='composer install' &&  sh -c 'make fpmi '"
+        sh "cd docker4php ; source .pname && export CMD='cd / ; rm -rf /var/www/html ; ln -s /opt/var/www/htnl /var/www/html  ; cd /var/www/htnl ; composer install; composer require drush/drush ' &&  sh -c 'make fpmi '"
       }
     }
 
@@ -75,7 +75,7 @@ pipeline {
 
     stage('yarn') {
       steps {
-        sh ' cd docker4php; export CMD="apk add yarn ; apk add npm ; cd /var/www/html/web/themes/jiscux ; yarn add @jisc/front-end-foundations ; yarn install ; rm -rf front-end-foundations ; ln -s node_modules/@jisc/front-end-foundations  ; touch front-end-foundations/src/scss/1-settings/settings.variables.images ; npm install -g gulp ; gulp build" ; make nginxi '
+        sh ' cd docker4php; export CMD="apk add yarn ; apk add npm ; cd /opt/var/www/html/web/themes/jiscux ; yarn add @jisc/front-end-foundations ; yarn install ; rm -rf front-end-foundations ; ln -s node_modules/@jisc/front-end-foundations  ; touch front-end-foundations/src/scss/1-settings/settings.variables.images ; npm install -g gulp ; gulp build" ; make nginxi '
       }
     }
  
