@@ -63,7 +63,7 @@ pipeline {
 
     stage('import-db') {
       steps {
-        sh 'cd docker4php ; source $PWD/.pname ; docker cp /Users/neil.mckett/projects/db_dumps/myjisc-latest.sql ${PROJECT_NAME}_php:/tmp ; export CMD="mysql -uroot -ppassword -hmariadb drupal < /tmp/myjisc-latest.sql " ; make fpmi '
+        sh 'cd docker4php ; source $PWD/.pname ; docker cp /opt/db_dumps/myjisc-latest.sql ${PROJECT_NAME}_php:/tmp ; export CMD="mysql -uroot -ppassword -hmariadb drupal < /tmp/myjisc-latest.sql " ; make fpmi '
       }
     }
 
