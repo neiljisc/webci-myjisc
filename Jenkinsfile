@@ -44,13 +44,13 @@ pipeline {
     stage('checkout') {
       steps {
         sh '(cd docker4php/data/web && rm -rf drupal && ln -s  ../../../ drupal)'
-        sh 'cd docker4php ;git checkout drupal9_web ; echo $PWD ;  # source .env && make && echo export PROJECT_NAME=$PROJECT_NAME >  .pname '
+        sh 'cd docker4php ;git checkout drupal9_web ; echo $PWD ;   source $PWD/.env && make && echo export PROJECT_NAME=$PROJECT_NAME >  .pname '
       }
     }
     
     stage('composer') {
       steps {
-        sh "cd docker4php ; source .pname && export CMD='cd / ; sudo rm -rf /var/www/html ; sudo ln -s /opt/var/www/html /var/www/html  ; cd /var/www/html ;rm -rf web/core ; composer install' &&  sh -c 'make fpmi '"
+        sh "cd docker4php ; source $PWD/.pname && export CMD='cd / ; sudo rm -rf /var/www/html ; sudo ln -s /opt/var/www/html /var/www/html  ; cd /var/www/html ;rm -rf web/core ; composer install' &&  sh -c 'make fpmi '"
       }
     }
 
@@ -63,7 +63,7 @@ pipeline {
 
     stage('import-db') {
       steps {
-        sh 'cd docker4php ; source .pname ; docker cp /Users/neil.mckett/projects/db_dumps/myjisc-latest.sql ${PROJECT_NAME}_php:/tmp ; export CMD="mysql -uroot -ppassword -hmariadb drupal < /tmp/myjisc-latest.sql " ; make fpmi '
+        sh 'cd docker4php ; source $PWD/.pname ; docker cp /Users/neil.mckett/projects/db_dumps/myjisc-latest.sql ${PROJECT_NAME}_php:/tmp ; export CMD="mysql -uroot -ppassword -hmariadb drupal < /tmp/myjisc-latest.sql " ; make fpmi '
       }
     }
 
