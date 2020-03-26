@@ -44,7 +44,7 @@ pipeline {
     stage('checkout') {
       steps {
         sh '(cd docker4php/data/web && rm -rf drupal && ln -s  ../../../ drupal)'
-        sh 'cd docker4php ;git checkout drupal9_web ; git pull ;   source .env && make && echo export PROJECT_NAME=$PROJECT_NAME >  .pname '
+        sh 'cd docker4php ;git checkout drupal9_web ;   source .env && make && echo export PROJECT_NAME=$PROJECT_NAME >  .pname '
       }
     }
     
