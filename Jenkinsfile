@@ -22,6 +22,7 @@ pipeline {
               git branch: 'drupal9_web', credentialsId: 'a3beddd6-e0fb-4e55-8928-6866e922b32e', url: 'https://github.com/janetuk/docker4php'
             }
         }
+      }
     }
 
     stage('webci') {
