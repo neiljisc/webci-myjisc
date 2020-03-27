@@ -3,7 +3,7 @@ pipeline {
   agent any 
 
   options {
-    timeout(10)
+    timeout(20)
   }
 
   stages {
